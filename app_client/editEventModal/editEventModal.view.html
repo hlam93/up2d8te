@@ -1,0 +1,18 @@
+<div id="{{eemcvm.event._id}}modal" class="modal-content text-center">
+	<div class="modal-header">
+		<button type="button" data-dismiss="modal" class="close">
+			<span aria-hidden="true">x</span><span class="sr-only">Close</span>
+		</button>
+		<ul class="list-inline list-unstyled">
+			<li><h4 class="makeblack">{{eemcvm.event.name}}</h4></li>
+		</ul>
+		<small class="makeblack">{{eemcvm.event.time | date : 'EEE MMM dd yyyy h:mm a'}}</small>
+	</div>
+	<div class="modal-body">
+		<p class="makeblack">{{eemcvm.event.info}}</p>
+	</div>
+	<div class="modal-footer">
+			<button type="button" class="btn btn-danger makeblack" data-dismiss="modal" ng-click="eemcvm.doDelete(eemcvm.event._id)">Delete</button>
+      	<button ng-click="eemcvm.modal.close()" type="button" class="btn btn-default makeblack">Close</button>
+	</div>
+</div>

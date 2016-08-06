@@ -1,0 +1,71 @@
+<div class="modal fade makeblack" id="aboutModal" role="dialog" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">About the App</h4>
+			</div>
+			<div class="modal-body">
+				<p>UP2D8TE is a fun project I worked on using the MEAN stack architecture.  The goal of the design was to implement a forum-like application on a small scope for small groups/organizations.  It is currently incomplete and has a few bugs on some implementations.</p>
+				<ul class="list-unstyled">
+					<li><strong>M:</strong> MongoDB</li>
+					<li><strong>E:</strong> ExpressJS</li>
+					<li><strong>A:</strong> AngularJS</li>
+					<li><strong>N:</strong> NodeJS</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Sign In Dialog Box -->
+<div class="modal fade makeblack" id="loginModal" role="dialog" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">Sign In</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control" id="userName" placeholder="User Name">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" id="password" placeholder="Password">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<h5 class="pull-left">Not a member? Register <a href="">here</a>!</h5>
+				<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="doLogin">Sign In</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade makeblack" id="contactModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title" id="contactModalLabel">Contact Us</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="email" class="form-control" id="email" placeholder="Your email">
+				</div>
+				<textarea class="form-control" placeholder="Leave a message!" style="min-width: 100%"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Send</button>
+			</div>
+
+		</div>
+	</div>
+</div>

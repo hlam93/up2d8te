@@ -1,0 +1,47 @@
+<!-- <div class="modal fade" id="{{vm._id}}modal" role="dialog" tabindex="-1"> -->
+	<!-- <div class="modal-dialog"> -->
+		<div class="modal-content text-center">
+			<form id="updateEvent" name="updateEvent" ng-submit="emcvm.onSubmit()" role="form" class="form-horizontal">
+				<div class="modal-header">
+					<button type="button" data-toggle="modal" data-dismiss="modal" class="close">
+						<span ng-click="emcvm.modal.close()" aria-hidden="true">x</span><span class="sr-only">Close</span>
+					</button>
+					<ul class="list-inline list-unstyled">
+						<li ng-hide="emcvm.readOnly">
+							<h4>
+								<input id="name" name="name" class="form-control" ng-model="emcvm.formData.name" value="{{emcvm.event.name}}" uib-tooltip="Change the name"></input>
+							</h4>
+						</li>
+						<li ng-show="emcvm.readOnly">
+							<h4 id="head" class="makeblack">{{emcvm.event.name}}</h4>
+						</li>
+
+						<li><!-- <button type="button" data-toggle="modal" data-target="#{{emcvm.event._id}}modal" ng-click="emcvm.popupEditEventForm(emcvm.event)"> -->
+							<button class="makeblack" ng-show="emcvm.readOnly" type="button" data-toggle="modal" data-target="#{{emcvm.event._id}}modal" ng-click="emcvm.toggleReadOnly()" tooltip-placement="right" uib-tooltip="Need to change something?">
+								<i class="glyphicon glyphicon-pencil"></i> Edit
+							</button>
+						</li>
+						<li>
+							<button class="makeblack" ng-hide="emcvm.readOnly" type="button" data-toggle="modal" data-target="#{{emcvm.event._id}}modal" ng-click="emcvm.toggleReadOnly()" tooltip-placement="right" uib-tooltip="Are you finished?">
+								<i class="glyphicon glyphicon-pencil"></i> Done
+							</button>
+						</li>
+					</ul>
+					<!-- UPDATE Event Time here -->
+					<small class="makeblack">{{emcvm.event.time | date : 'EEE MMM dd yyyy h:mm a'}}</small>
+					<!--  -->
+				</div>
+				<div class="modal-body">
+					<p class="makeblack" ng-show="emcvm.readOnly">{{emcvm.event.info}}</p>
+					<p class="makeblack" ng-hide="emcvm.readOnly">
+						<textarea id="info" name="info" class="form-control" rows="5" ng-model="emcvm.formData.info" value="{{emcvm.event.info}}" uib-tooltip="Change the description"></textarea>
+					</p>
+				</div>
+				<div class="modal-footer">
+						<button ng-hide="emcvm.readOnly" type="submit" class="btn btn-success" data-dismiss="modal" >Save changes</button> <!-- ng-click="emcvm.doEdit(emcvm.event._id)" -->
+						<button ng-show="emcvm.readOnly" type="button" class="btn btn-danger" data-dismiss="modal" ng-click="emcvm.doDelete(emcvm.event._id)">Delete</button>
+			      	<button ng-click="emcvm.modal.close()" type="button" class="btn btn-default">Close</button>
+				</div>
+			</form>
+		</div>
+<!-- 	</div>

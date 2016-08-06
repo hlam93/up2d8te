@@ -1,0 +1,64 @@
+body {
+	padding-top: 70px;
+	background-color: black;
+	color: white;
+	font-family: "Montserrat";
+	font: "Montserrat";
+}
+
+body p {
+	font-size: 16px;
+}
+
+a {
+  color: #00B7FF;
+}
+
+footer {
+	padding-top: 30px;
+}
+.navbar-brand span {
+	font-size: 36px;
+}
+
+.navbar-default {
+	padding-top:30px;
+}
+
+.navbar-brand,
+.navbar-nav {
+	height: 80px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+	font-size: 18px;
+}
+
+.navbar-default .navbar-toggle {
+	width: 60px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+	height: 3px;
+	padding-top: 2px;
+	width: 36px;
+    background-color: black;
+}
+
+@media (max-width: 767px) {
+	.navbar-nav {
+		height: 110% !important;
+	}
+    .navbar-nav > li > a {
+        line-height: 50px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        height: auto !important;
+        overflow: visible !important;
+    }
+}
+
+.makeblack {
+    color: black;
+}

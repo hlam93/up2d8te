@@ -1,0 +1,67 @@
+<style>
+#subhead {
+    font-size: 30px;
+}
+
+</style>
+<div class="col-lg-10 col-lg-offset-1">
+
+    <!-- Subheader -->
+    <div class="container-fluid">
+        <div ng-if="content.head" class="col-lg-12">
+<!--             <p id="subhead" class="text-lead">{{content.head}}</p> -->
+            <small>{{message}}</small>
+        
+        </div>
+        <!-- <div ng-if="events" class="col-lg-12"> -->
+
+            <ul class="list-inline" ng-if="events">
+                <li class="btn">
+                    <button class="makeblack" type="button" ng-click="mbcvm.popupAddEventForm()">
+                        <span class="glyphicon glyphicon-plus"></span> Create
+                    </button>
+                </li>
+<!--                 <li class="btn pull-left">
+                    <button type="button" ng-click="mbcvm.popupEditEventForm()">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </button>
+                </li> -->
+            </ul>
+
+    <!-- Close subheader -->
+    </div>
+
+    <!-- Event section -->
+
+        <div class="col-lg-offset-2 col-lg-8" ng-if="events"> 
+            <!-- eventCtrl & mainBodyCtrl & viewEventCtrl -->
+            <!-- To do? Filter expired events -->
+            <div  ng-repeat="event in events | orderBy:'time': false" >
+
+                <div class="list-group-item list-unstyled">
+                    <p id="subhead" class="text-primary makeblack"><a href="#" data-dismiss="close" data-toggle="modal" ng-click="mbcvm.popupViewEvent(event)">{{event.name}}</a></p>
+
+                    <p class="makeblack">{{event.time | date : 'EEE MMM dd yyyy h:mm a' }} at {{event.location}}</p>
+                </div>
+            </div>
+        </div>
+
+    <!-- Close Event section -->
+
+    <!-- Home page section -->
+    <div class="text-left">
+        <p ng-if="home" ng-bind-html="mbcvm.content | addHtmlLineBreaks"></p>
+    </div>
+    <!-- Home page section -->
+
+    <!-- BRP Section -->
+    <div class="text-center">
+        <p class="text-center" ng-show="bible">{{content.body}} <a class="text-center" href='{{content.link}}'>here</a>!</p>
+    </div>
+    <div class="list-group text-center col-lg-4 col-lg-offset-4" ng-if="bible">
+        <div class="list-group-item"  ng-repeat="verse in bible">
+            <a class="page-scroll" href="#/verse" data-toggle="modal" data-target="#verseModal{{verse.id}}">{{verse.ref}}</a>
+            <verse-modal ref="verse.ref" text="verse.text" id="verse.id"></verse-modal>
+        </div>
+    </div>
+</div>

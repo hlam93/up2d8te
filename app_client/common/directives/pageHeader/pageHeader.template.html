@@ -1,0 +1,15 @@
+<style>
+#menu {
+	padding-top: 60px;
+}
+
+#item {
+	font-size: 20px;
+}
+</style>
+<div id="menu">
+	<ul class="list-group list-unstyled list-inline">
+	<!-- use angular for logic  -->
+		<li id="item" ng-repeat="item in phcvm.list"><span class="glyphicon glyphicon-triangle-right"></span><a href="/#{{item.url}}/">{{item.name}}</a></li>
+	</ul>
+</div>
