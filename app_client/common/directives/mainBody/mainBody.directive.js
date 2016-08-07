@@ -11,7 +11,7 @@
 				message : '=message',
 				path : '=path',
 				events : '=events',
-				bible : '=bible',
+				entries : '=entries',
 				home : '=home'
 			},
 			templateUrl: '/common/directives/mainBody/mainBody.template.html',

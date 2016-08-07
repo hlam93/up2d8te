@@ -7,9 +7,7 @@
 		return {
 			restrict: 'EA',
 			scope: {
-				ref : '=ref',
-				id : '=id',
-				text : '=text'
+				entry: '=entry'
 			},
 			templateUrl: '/common/directives/verseModal/verseModal.template.html'
 		};

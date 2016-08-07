@@ -3,33 +3,59 @@
 		.module('forumApp')
 		.service('bible', bible);
 
-	function bible () {
-		var verses = [
-			{
-				id: 1,
-				ref: "Proverbs 3:5-6",
-				text: "Trust in the Lord with all your heart and lean not on your own understanding.  In all of your ways acknowledge him and he will set your paths straight."
-			}, {
-				id: 2,
-				ref: "Joshua 1:9",
-				text: "Be strong and courageous.  Do not be frightened and do not be dismayed.  For the Lord your God is with you wherever you go."
-			}, {
-				id: 3,
-				ref: "Hebrews 12:11",
-				text: "For the moment all discipline seems painful rather than pleasant, but later it yields the peaceful fruit of righteousness to those who have been trained by it."
-			}, {
-				id: 4,
-				ref: "1 Corinthians 9:25-26",
-				text: "Every athlete exercises self-control in all things. They do it to receive a perishable wreath, but we an imperishable. So I do not run aimlessly; I do not box as one beating the air."
-			}
-		];
+	bible.$inject = ['$http'];
+	function bible ($http) {
+		var getEntries = function () {
+			return $http.get('/api/brp');
+		};
 
-		var getVerses = function () {
-			return verses;
+		var getEntryById = function (entryid) {
+			return $http.get('/api/brp/' + entryid);
+		};
+
+		var createEntry = function (data) {
+			return $http.post('/api/brp', data);
+		};
+
+		var updateEntry = function (entryid, data) {
+			return $http.put('/api/brp/' + entryid, data);
+		};
+
+		var deleteEntry = function (entryid) {
+			return $http.delete('/api/brp/' + entryid);
+		};
+
+		var getReadings = function (entryid) {
+			return $http.get('/api/brp/' + entryid + '/readings');
+		};
+
+		var getReadingById = function (entryid, readingid) {
+			return $http.get('/api/brp/' + entryid + '/readings/' + readingid);
+		};
+
+		var createReading = function (entryid, data) {
+			return $http.post('/api/brp/' + entryid + '/readings', data);
+		};
+
+		var updateReading = function (entryid, readingid, data) {
+			return $http.put('/api/brp/' + entryid + '/readings/' + readingid, data);
+		};
+
+		var deleteReading = function (entryid, readingid) {
+			return $http.delete('/api/brp/' + entryid + '/readings/' + readingid);
 		};
 
 		return {
-			getVerses : getVerses
+			getEntries : getEntries,
+			getEntryById : getEntryById,
+			createEntry : createEntry,
+			updateEntry : updateEntry,
+			deleteEntry : deleteEntry,
+			getReadings : getReadings,
+			getReadingById : getReadingById,
+			createReading : createReading,
+			updateReading : updateReading,
+			deleteReading : deleteReading
 		};
 	}
 })();

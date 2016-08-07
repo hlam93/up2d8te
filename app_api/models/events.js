@@ -7,8 +7,8 @@ var guestSchema = new mongoose.Schema({
 	lastName : { 
 		type : String, required: true 
 	},
-	attending : { 
-		enum : ['Yes', 'No', 'Maybe'] 
+	attending : {
+		type: Boolean, required: true, enum : [true, false] 
 	}
 });
 

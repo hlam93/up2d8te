@@ -56,12 +56,12 @@
 
     <!-- BRP Section -->
     <div class="text-center">
-        <p class="text-center" ng-show="bible">{{content.body}} <a class="text-center" href='{{content.link}}'>here</a>!</p>
+        <p class="text-center" ng-show="entries">{{content.body}} <a class="text-center" href='{{content.link}}'>here</a>!</p>
     </div>
-    <div class="list-group text-center col-lg-4 col-lg-offset-4" ng-if="bible">
-        <div class="list-group-item"  ng-repeat="verse in bible">
-            <a class="page-scroll" href="#/verse" data-toggle="modal" data-target="#verseModal{{verse.id}}">{{verse.ref}}</a>
-            <verse-modal ref="verse.ref" text="verse.text" id="verse.id"></verse-modal>
+    <div class="list-group text-center col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 makeblack" ng-if="entries">
+        <div class="list-group-item" ng-repeat="entry in entries">
+            <a class="page-scroll" href="#" data-toggle="modal" data-target="#verseModal{{entry._id}}">{{entry.day | date : 'EEE MMM dd yyyy' }}</a>
+            <verse-modal entry="entry"></verse-modal>
         </div>
     </div>
 </div>

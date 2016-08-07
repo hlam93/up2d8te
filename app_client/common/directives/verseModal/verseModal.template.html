@@ -1,12 +1,17 @@
-<div class="modal fade makeblack" id="verseModal{{id}}" role="dialog" tabindex="-1">
+<div class="modal fade makeblack" id="verseModal{{entry._id}}" role="dialog" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-				<h4 class="modal-title">{{ref}}</h4>
+				<h4 class="modal-title">{{entry.day | date : 'EEE MMM dd yyyy'}}</h4>
 			</div>
 			<div class="modal-body">
-				<p>{{text}}</p>
+				<ul class="list-unstyled" ng-repeat="reading in entry.readings">
+				<li>
+					<strong>{{reading.book}} {{reading.chapter}}:{{reading.verses}}</strong>
+				</li>
+				<li>{{reading.text}}</li>
+				</ul>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>

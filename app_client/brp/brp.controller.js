@@ -13,6 +13,15 @@
 			link: '#'
 		};
 		
-		vm.bibleData = bible.getVerses();
+		bible.getEntries()
+		.success(function(entries) {
+			vm.message = entries.length > 0 ? "" : "No entries available";
+			vm.entries = entries;
+		})
+		.error(function (e) {
+			vm.message = 'Sorry, something\'s wrong';
+			console.log(e);
+		});
+
 	}
 })();
