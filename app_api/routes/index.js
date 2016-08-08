@@ -16,9 +16,9 @@ var ctrlAuth = require('../controllers/authentication');
 router.get('/events/org', ctrlEvents.getOrgEvents);
 router.get('/events/local', ctrlEvents.getLocalEvents);
 router.get('/events/:eventid', ctrlEvents.getEventbyId);
-router.post('/events', ctrlEvents.createEvent);
-router.put('/events/:eventid', ctrlEvents.updateEvent);
-router.delete('/events/:eventid', ctrlEvents.deleteEvent);
+router.post('/events', auth, ctrlEvents.createEvent);
+router.put('/events/:eventid', auth, ctrlEvents.updateEvent);
+router.delete('/events/:eventid', auth, ctrlEvents.deleteEvent);
 
 // Guestlist here
 router.get('/events/org/:eventid', ctrlGuestlist.getGuestList);

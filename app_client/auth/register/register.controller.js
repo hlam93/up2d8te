@@ -3,8 +3,8 @@
 	.module('forumApp')
 	.controller('registerCtrl', registerCtrl);
 
-	registerCtrl.$inject = ['$location'];
-	function registerCtrl ($location) {
+	registerCtrl.$inject = ['$location', 'authentication'];
+	function registerCtrl ($location, authentication) {
 		var vm = this;
 
 		vm.mainContent = {
@@ -35,6 +35,16 @@
 		vm.doRegister = function () {
 			// authentication service here
 			console.log(vm.credentials);
+			authentication
+				.register(vm.credentials)
+				.error(function (err) {
+					vm.formError = err;
+				})
+				.then(function () {
+					$location.search('page', null);
+					$location.path(vm.returnPage);
+				});
+			vm.formError = null;
 		};
 	}
 })();

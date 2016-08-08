@@ -29,10 +29,17 @@
                     <a class="page-scroll" href="#" data-toggle="modal" data-target="#contactModal"><span class="makeblack">Contact</span></a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#" data-toggle="modal" data-target="#registerModal"><span class="makeblack">Register</span></a>
+                    <a ng-hide="navvm.isLoggedIn" class="page-scroll" href="#" data-toggle="modal" data-target="#registerModal"><span class="makeblack">Register</span></a>
+                </li>
+                <li ng-show="navvm.isLoggedIn" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{navvm.currentUser.firstName}}<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a class="makeblack" href="#" ng-click="navvm.logout()">Logout</a></li>
+                        </ul>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#" data-toggle="modal" data-target="#loginModal"><span class="makeblack">Login</span></a>
+                    <a ng-hide="navvm.isLoggedIn" class="page-scroll" href="#" data-toggle="modal" data-target="#loginModal"><span class="makeblack">Login</span></a>
+                    <!-- add logout confirmation dialog modal -->
                 </li>
             </ul>
         </div>
