@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+var jwt = require('express-jwt');
+var auth = jwt({
+	secret: process.env.JWT_SECRET,
+	userProperty: 'payload'
+});
+
 var ctrlEvents = require('../controllers/events');
 var ctrlEntries = require('../controllers/entries');
 var ctrlGuestlist = require('../controllers/guestlist');
+var ctrlAuth = require('../controllers/authentication');
 
 // Event controls
 router.get('/events/org', ctrlEvents.getOrgEvents);
@@ -31,5 +38,9 @@ router.get('/brp/:entryid/readings/:readingid', ctrlEntries.getReadingById);
 router.post('/brp/:entryid/readings', ctrlEntries.createReading);
 router.put('/brp/:entryid/readings/:readingid', ctrlEntries.updateReading);
 router.delete('/brp/:entryid/readings/:readingid', ctrlEntries.deleteReading);
+
+// Authentication 
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
 
 module.exports = router;

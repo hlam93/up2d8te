@@ -1,10 +1,14 @@
+require('dotenv').load();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+var passport = require('passport');
 require('./app_api/models/db');
+require('./app_api/config/passport')
 // var routes = require('./routes/index');
 // var users = require('./routes/users');
 
@@ -24,6 +28,8 @@ var appClientFiles = [
   'app_client/addEventModal/addEventModal.controller.js',
   'app_client/viewEventModal/viewEventModal.controller.js',
   // 'app_client/editEventModal/editEventModal.controller.js',
+  'app_client/auth/login/login.controller.js',
+  'app_client/auth/register/register.controller.js',
   'app_client/common/directives/tooltip/tooltip.controller.js',
   'app_client/common/directives/datePicker/datePicker.controller.js',
   'app_client/common/directives/navigation/navigation.controller.js',
@@ -43,6 +49,7 @@ var appClientFiles = [
   'app_client/common/services/geolocation.service.js',
   'app_client/common/services/events.service.js',
   'app_client/common/services/bible.service.js',
+  'app_client/common/services/authentication.service.js',
   'app_client/common/filters/addHtmlLineBreaks.filter.js'
   // 'app_client/common/filters/isValidDate.filter.js'
   ];
@@ -70,16 +77,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // SPA client-side application
 app.use(express.static(path.join(__dirname, 'app_client')));
 
+app.use(passport.initialize());
 // app.use('/', routes);
 // app.use('/users', users);
 app.use('/api', routesAPI);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
 
 // error handlers
 /* catchall when unmatched URL request to SERVER routes
@@ -87,6 +88,13 @@ app.use(function(req, res, next) {
  */
 app.use(function(req, res) {
   res.sendfile(path.join(__dirname, 'app_client', 'index.html'));
+});
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // development error handler

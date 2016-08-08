@@ -48,4 +48,4 @@ process.on('SIGTERM', function() {
 // BRING IN YOUR SCHEMAS & MODELS
 require('./events');
 require('./entries');
-// require('./users');
+require('./users');
