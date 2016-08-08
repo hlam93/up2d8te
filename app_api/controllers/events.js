@@ -90,10 +90,10 @@ module.exports.updateEvent = function (req, res) {
 				sendJSONresponse(res, 404, err);
 				return;
 			}
-			// do changes
+			// update changes
 			event.name = req.body.name;
-			event.time = req.body.time;
-			event.location = req.body.location;
+			// event.time = req.body.time;
+			// event.location = req.body.location;
 			event.info = req.body.info;
 			event.save(function (err, event) {
 				if (err) {

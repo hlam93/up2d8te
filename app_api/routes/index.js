@@ -3,7 +3,7 @@ var router = express.Router();
 
 var ctrlEvents = require('../controllers/events');
 var ctrlEntries = require('../controllers/entries');
-
+var ctrlGuestlist = require('../controllers/guestlist');
 
 // Event controls
 router.get('/events/org', ctrlEvents.getOrgEvents);
@@ -14,6 +14,9 @@ router.put('/events/:eventid', ctrlEvents.updateEvent);
 router.delete('/events/:eventid', ctrlEvents.deleteEvent);
 
 // Guestlist here
+router.get('/events/org/:eventid', ctrlGuestlist.getGuestList);
+router.get('/events/local/:eventid', ctrlGuestlist.getGuestList);
+router.post('/events/:eventid', ctrlGuestlist.addGuest);
 
 // Entries here
 router.get('/brp', ctrlEntries.getEntries);

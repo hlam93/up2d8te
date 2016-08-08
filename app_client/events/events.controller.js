@@ -6,15 +6,14 @@
 	eventsCtrl.$inject = ['events', '$location'];
 	function eventsCtrl (events, $location) {
 		var vm = this;
-		// console.log($location.path());
 		vm.isHome = false;
 		vm.isEvent = true;
 		vm.currentDate = Date.now();
-		vm.path = $location.path();
 		events.currentPath = $location.path();
 		vm.message = "Getting schedule";
 
 		if ($location.path() === '/events/local') {
+			vm.path = 1;
 			vm.mainContent = {
 				head: 'Informal Events',
 			};
@@ -28,6 +27,7 @@
 					console.log(e);
 				});
 		} else {
+			vm.path = 0;
 			vm.mainContent = {
 				head: 'Organization Schedule',
 			};

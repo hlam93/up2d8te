@@ -3,15 +3,14 @@
 		.module('forumApp')
 		.controller('addEventModalCtrl', addEventModalCtrl);
 
-	addEventModalCtrl.$inject = ['$uibModalInstance', 'events'];
-	function addEventModalCtrl ($uibModalInstance, events) {
+	addEventModalCtrl.$inject = ['$uibModalInstance', 'events', 'path'];
+	function addEventModalCtrl ($uibModalInstance, events, path) {
 		var vm = this;
-
 		vm.onSubmit = function () {
 			vm.formError = "";
 			// Validation check
-			if (!vm.formData || !vm.formData.eventName || !vm.formData.eventType ||
-				!vm.formData.dateTime || !vm.formData.eventLocation || !vm.formData.eventInfo) {
+			if (!vm.formData || !vm.formData.eventName || !vm.formData.dateTime 
+				|| !vm.formData.eventLocation || !vm.formData.eventInfo) {
 				vm.formError = "All fields required, please try again";
 				return false;
 			} else if (Number(vm.formData.dateTime) <= Number(Date.now())) {
@@ -25,7 +24,7 @@
 		vm.doAddEvent = function (formData) {
 			events
 			.addEvent({
-				cat: formData.eventType,
+				cat: path,
 				name: formData.eventName,
 				time: formData.dateTime,
 				location : formData.eventLocation,

@@ -13,7 +13,6 @@
 			'\nFinished features:\n- Events CRUD actions\n- Geolocation\n\n' +
 			'To do:\n' + 
 			'- Fix event same page update when adding new events and updating an event ~ buggy\n' +
-			'- BRP CRUD actions: BRP data is currently hard-coded.\n' +
 			'- Guestlist & Comments CRUD for events\n' +
 			'- Navigation Links + User Authentication\n\n' + 
 			

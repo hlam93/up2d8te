@@ -6,14 +6,16 @@
 	mainBodyCtrl.$inject = ['$scope', '$uibModal', 'events', 'bible'];
 	function mainBodyCtrl ($scope, $uibModal, events, bible) {
 		var vm = this;
-		// console.log("here " + $scope.content.body);
 		vm.content = $scope.content.body;
 		vm.path = $scope.path;
 
 		vm.popupAddEventForm = function () {
 			var modalInstance = $uibModal.open({
 				templateUrl: '/addEventModal/addEventModal.view.html',
-				controller: 'addEventModalCtrl as vm'
+				controller: 'addEventModalCtrl as vm',
+				resolve : {
+					path : vm.path
+				}
 			});
 
 			modalInstance.result.then(function (data) {
@@ -42,7 +44,7 @@
 					}
 					if(data.delete)
 						$scope.events.splice(index, 1);
-					else if(data.edit){ // updates don't auto update :/
+					else if(data.edit) {
 						$scope.events[index].name = event.name;
 						$scope.events[index].info = event.info;
 						$scope.events[index].time = event.time;

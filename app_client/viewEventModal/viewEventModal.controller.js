@@ -3,40 +3,12 @@
 		.module('forumApp')
 		.controller('viewEventModalCtrl', viewEventModalCtrl);
 
-	// viewEventModalCtrl.$inject = ['$uibModalInstance'];
 	viewEventModalCtrl.$inject = ['event', '$uibModal', '$uibModalInstance', 'events'];
 	function viewEventModalCtrl (event, $uibModal, $uibModalInstance, events) {
 		var vm = this;
 		vm.event = event;
 		vm.readOnly = true;
-		// console.log(vm.event);
-		// vm.popupEditEventForm = function (event) {
-		// 	var modalInstance = $uibModal.open({
-		// 		templateUrl: '/editEventModal/editEventModal.view.html',
-		// 		controller: 'editEventModalCtrl as eemcvm',
-		// 		resolve: {
-		// 			event : event,
-		// 			modal : this
-		// 		}
-		// 	});
-
-		// 	modalInstance.result.then(function (data) {
-		// 		console.log("do updaet");
-		// 		var index = 0;
-		// 		for (var i = 0; i < $scope.events.length; i++){
-		// 			if ($scope.events[i]._id === event._id)
-		// 			{	
-		// 				index = i;
-		// 				break;
-		// 			}
-		// 		} // inplace update
-		// 			$scope.events[index].name = event.name;
-		// 			$scope.events[index].info = event.info;
-		// 			$scope.events[index].time = event.time;
-		// 			$scope.events[index].location = event.location;
-		// 			$scope.events.push(data);
-		// 		});
-		// };
+		vm.hasGuests = event.guestList.length > 0 ? true : false;
 
 		vm.toggleReadOnly = function () {
 			if (vm.readOnly) {
@@ -48,7 +20,6 @@
 				vm.readOnly = true;
 			}
 		};
-
 
 		vm.doDelete = function (eventId){
 			events
@@ -80,11 +51,10 @@
 				data.edit = true;
 				vm.modal.close(data);
 			})
-			.error(function() {
+			.error(function(data) {
 				console.log("Could not save changes, try again.");
 			});
-
-
+			return false;
 		};
 
 		vm.modal = {
