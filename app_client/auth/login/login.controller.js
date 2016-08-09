@@ -32,7 +32,6 @@
 
 		vm.doLogin = function () {
 			// authentication service here
-			console.log(vm.credentials);
 			authentication
 				.login(vm.credentials)
 				.error(function (err) {

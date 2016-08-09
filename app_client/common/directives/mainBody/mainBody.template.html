@@ -12,7 +12,7 @@
         </div>
         <!-- <div ng-if="events" class="col-lg-12"> -->
 
-            <ul class="list-inline" ng-if="events">
+            <ul ng-show="mbcvm.isLoggedIn" class="list-inline" ng-if="events">
                 <li class="btn">
                     <!-- add authentication here -->
                     <button class="makeblack" type="button" ng-click="mbcvm.popupAddEventForm()">

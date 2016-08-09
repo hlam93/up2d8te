@@ -48,7 +48,8 @@
 				var payload = JSON.parse($window.atob(token.split('.')[1]));
 				return {
 					email : payload.email,
-					firstName : payload.firstName
+					firstName : payload.firstName,
+					lastName : payload.lastName
 				};
 			}
 		};

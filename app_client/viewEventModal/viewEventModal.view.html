@@ -4,7 +4,7 @@
 			<button type="button" data-toggle="modal" data-dismiss="modal" class="close">
 				<span ng-click="emcvm.modal.close()" aria-hidden="true">x</span><span class="sr-only">Close</span>
 			</button>
-			<ul class="list-inline list-unstyled">
+			<ul class="list-unstyled">
 				<div role="alert" ng-hide="emcvm.readOnly" ng-if="emcvm.formError" class="alert alert-danger">	{{emcvm.formError}}
 				</div>
 				<li ng-hide="emcvm.readOnly">
@@ -14,21 +14,23 @@
 				</li>
 
 				<li ng-show="emcvm.readOnly">
-					<h4 id="head" class="makeblack">{{emcvm.event.name}}</h4>
+					<ul class="list-inline list-unstyled">
+						<li><h4 id="head" class="makeblack">{{emcvm.event.name}}</h4></li>
+						<li ng-show="emcvm.isLoggedIn">
+							<!-- add authentication here -->
+							<button class="makeblack" ng-show="emcvm.readOnly" type="button" data-toggle="modal" data-target="#{{emcvm.event._id}}modal" ng-click="emcvm.toggleReadOnly()" tooltip-placement="right" uib-tooltip="Need to change something?">
+								<i class="glyphicon glyphicon-pencil"></i> Edit
+							</button>
+							<!-- close authentication here -->
+							<button class="makeblack" ng-hide="emcvm.readOnly" type="button" data-toggle="modal" data-target="#{{emcvm.event._id}}modal" ng-click="emcvm.toggleReadOnly()" tooltip-placement="right" uib-tooltip="Are you finished?">
+								<i class="glyphicon glyphicon-pencil"></i> Done
+							</button>
+						</li>
+					</ul>
 				</li>
+				<li><small class="makeblack">Posted by: {{emcvm.event.createdBy}}</small></li>
 
-				<li>
-					<!-- add authentication here -->
-					<button class="makeblack" ng-show="emcvm.readOnly" type="button" data-toggle="modal" data-target="#{{emcvm.event._id}}modal" ng-click="emcvm.toggleReadOnly()" tooltip-placement="right" uib-tooltip="Need to change something?">
-						<i class="glyphicon glyphicon-pencil"></i> Edit
-					</button>
-					<!-- close authentication here -->
-				</li>
-				<li>
-					<button class="makeblack" ng-hide="emcvm.readOnly" type="button" data-toggle="modal" data-target="#{{emcvm.event._id}}modal" ng-click="emcvm.toggleReadOnly()" tooltip-placement="right" uib-tooltip="Are you finished?">
-						<i class="glyphicon glyphicon-pencil"></i> Done
-					</button>
-				</li>
+
 			</ul>
 			<!-- UPDATE Event Time here -->
 			<small class="makeblack">{{emcvm.event.time | date : 'EEE MMM dd yyyy h:mm a'}}</small>
@@ -53,14 +55,16 @@
 			<!-- End guestlist -->
 		</div>
 		<div class="modal-footer">
-			<!-- authentication here -->
-			<div class="pull-left makeblack">
-				<strong>Will you attend?</strong>
-				<a class="btn btn-default" href="#">Yes</a>
-				<a class="btn btn-default" href="#">No</a>
+			<!-- authentication here + user state -->
+			<div class="pull-left makeblack" ng-show="emcvm.isLoggedIn">
+				<ul class="list-inline list-unstyled" >
+					<li><strong>Will you attend?</strong></li>
+					<li><a class="btn btn-default" href="#" ng-click="emcvm.addGoing()">Yes</a></li>
+					<li><a class="btn btn-default" href="#" ng-click="emcvm.addNotGoing()">No</a></li>
+				</ul>
 			</div>
-			<button ng-hide="emcvm.readOnly" type="submit" class="btn btn-success" data-dismiss="modal">Save changes</button>
-			<button ng-show="emcvm.readOnly" type="button" class="btn btn-danger" data-dismiss="modal" ng-click="emcvm.doDelete(emcvm.event._id)">Delete</button>
+				<span ng-show="emcvm.isLoggedIn"><button ng-hide="emcvm.readOnly" type="submit" class="btn btn-success" data-dismiss="modal">Save changes</button></span>
+				<span ng-show="emcvm.isLoggedIn"><button ng-show="emcvm.readOnly" type="button" class="btn btn-danger" data-dismiss="modal" ng-click="emcvm.doDelete(emcvm.event._id)">Delete</button></span>
 			<!-- end authentication -->
 	      	<button ng-click="emcvm.modal.close()" type="button" class="btn btn-default">Close</button>
 		</div>

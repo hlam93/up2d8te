@@ -3,10 +3,11 @@
 		.module('forumApp')
 		.controller('navModalCtrl', navModalCtrl);
 
-	navModalCtrl.$inject = ['$location'];
-	function navModalCtrl ($location) {
+	navModalCtrl.$inject = ['$location', 'authentication'];
+	function navModalCtrl ($location, authentication) {
 	    var vm = this;
-	    
+	    vm.currentUser = authentication.currentUser();
+
 	    vm.currentPath = $location.path();
 	}
 })();

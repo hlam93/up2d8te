@@ -3,9 +3,10 @@
 		.module('forumApp')
 		.controller('addEventModalCtrl', addEventModalCtrl);
 
-	addEventModalCtrl.$inject = ['$uibModalInstance', 'events', 'path'];
-	function addEventModalCtrl ($uibModalInstance, events, path) {
+	addEventModalCtrl.$inject = ['$uibModalInstance', 'events', 'path', 'authentication'];
+	function addEventModalCtrl ($uibModalInstance, events, path, authentication) {
 		var vm = this;
+
 		vm.onSubmit = function () {
 			vm.formError = "";
 			// Validation check
@@ -17,15 +18,18 @@
 				vm.formError = "Please pick a valid date";
 				return false;
 			} else {
+				vm.formData.firstName = authentication.currentUser().firstName;
 				vm.doAddEvent(vm.formData);
 			}
 		};
 
 		vm.doAddEvent = function (formData) {
+			console.log(formData);
 			events
 			.addEvent({
 				cat: path,
 				name: formData.eventName,
+				createdBy : formData.firstName,
 				time: formData.dateTime,
 				location : formData.eventLocation,
 				info: formData.eventInfo

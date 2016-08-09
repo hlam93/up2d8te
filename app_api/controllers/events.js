@@ -65,11 +65,13 @@ module.exports.createEvent = function (req, res) {
 	Event.create({
 		cat : req.body.cat,
 		name : req.body.name,
+		createdBy : req.body.createdBy,
 		time : req.body.time,
 		location: req.body.location,
 		info : req.body.info
 	}, function (err, event) {
 		if (err) {
+			console.log(err);
 			sendJSONresponse(res, 400, err);
 		} else {
 			sendJSONresponse(res, 200, event);

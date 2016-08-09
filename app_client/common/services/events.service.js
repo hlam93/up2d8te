@@ -16,7 +16,6 @@
 		};
 
 		var addEvent = function (data) {
-			// console.log(data);
 			return $http.post('/api/events', data);
 		};
 
@@ -26,6 +25,18 @@
 
 		var updateEventById = function (eventid, formData) {
 			return $http.put('/api/events/' + eventid, formData);
+		};
+
+		var addGuest = function (eventid, user) {
+			return $http.post('/api/events/' + eventid, user);
+		};
+
+		var findGuest = function (eventid, emailid) {
+			return $http.get('/api/events/' + eventid + '/guests/' + emailid);
+		};
+
+		var getGuestlist = function (eventid) {
+			return $http.get('/api/events/' + eventid + '/guests');
 		};
 
 		var show = false;
@@ -38,6 +49,9 @@
 			getLocalEvents : eventsLocal,
 			deleteEvent : deleteEvent,
 			updateEventById : updateEventById,
+			addGuest : addGuest,
+			findGuest : findGuest,
+			getGuestlist : getGuestlist,
 			currentPath : currentPath,
 			show : show
 		};

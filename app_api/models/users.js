@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
@@ -39,7 +38,7 @@ userSchema.methods.generateJwt = function () {
 
 	return jwt.sign({
 		_id: this._id,
-		email: this._email,
+		email: this.email,
 		firstName: this.firstName,
 		lastName: this.lastName,
 		exp: parseInt(expiry.getTime() / 1000)

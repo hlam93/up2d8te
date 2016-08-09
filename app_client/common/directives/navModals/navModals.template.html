@@ -46,7 +46,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="doRegister">Register</button>
+					<button type="submit" class="btn btn-primary" id="doRegister">Register</button>
 				</div>
 			</form>
 		</div>
@@ -76,7 +76,7 @@
 				<div class="modal-footer">
 					<h5 class="pull-left">Not a member? Register <a href="#" data-toggle="modal" data-target="#registerModal">here</a>!</h5>
 					<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="doLogin">Sign In</button>
+					<button type="submit" class="btn btn-primary" id="doLogin">Sign In</button>
 				</div>
 			</form>
 		</div>
@@ -93,7 +93,8 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<input type="email" class="form-control" id="email" placeholder="Your email">
+					<input type="email" class="form-control" id="email" placeholder="Your email" ng-hide="navvm.currentUser">
+					<h6 ng-show="navvm.currentUser">From: {{navvm.currentUser.email}}</h6>
 				</div>
 				<textarea class="form-control" placeholder="Leave a message!" style="min-width: 100%"></textarea>
 			</div>

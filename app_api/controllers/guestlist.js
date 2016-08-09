@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Event = mongoose.model('Event');
+var User = mongoose.model('User');
 
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
@@ -37,6 +38,10 @@ var getGuestList = function (req, res) {
 	}
 };
 
+module.exports.getGuestList = function (req, res) {
+	getGuestList(req, res);
+};
+
 var doAddGuest = function (req, res, event) {
 	if (!event) {
 		sendJSONresponse(res, 404, {
@@ -45,6 +50,7 @@ var doAddGuest = function (req, res, event) {
 		return;
 	} else {
 		event.guestList.push({
+			email : req.body.email,
 			firstName : req.body.firstName,
 			lastName : req.body.lastName,
 			attending : req.body.attending
@@ -59,6 +65,7 @@ var doAddGuest = function (req, res, event) {
 				sendJSONresponse(res, 201, thisGuestList);
 			}
 		});
+
 	}
 };
 
@@ -72,6 +79,7 @@ module.exports.addGuest = function (req, res) {
 					sendJSONresponse(res, 404, err);
 				} else {
 					doAddGuest(req, res, event);
+					// doRegisterEvent(req, res, event);
 				}
 			});
 	} else {
@@ -81,6 +89,40 @@ module.exports.addGuest = function (req, res) {
 	}
 };
 
-module.exports.getGuestList = function (req, res) {
-	getGuestList(req, res);
+module.exports.findGuest = function (req, res) {
+	if (req.params.eventid && req.params.emailid) {
+		Event
+		.findById(req.params.eventid)
+		.select('guestList')
+		.exec(function (err, event) {
+			var thisGuest;
+			if (!event) {
+				sendJSONresponse(res, 404, {
+					"message" : "eventid does not exist"
+				}); return;
+			} else if (err) {
+				sendJSONresponse(res, 400, err); return;
+			}
+			if (event.guestList && event.guestList.length > 0) {
+				for (var i = 0; i < event.guestList.length; i++)
+				{
+					if (req.params.emailid === event.guestList[i].email) {
+						sendJSONresponse(res, 200, {
+							email : req.params.emailid,
+							replied : true
+						});
+						return;
+					}
+				}
+			} else {
+				sendJSONresponse(res, 400, {
+					"message" : "eventid not found"
+				});
+			}
+		});
+	} else {
+		sendJSONresponse(res, 404, {
+			"message" : "not found, eventid and email required"
+		});
+	}
 };

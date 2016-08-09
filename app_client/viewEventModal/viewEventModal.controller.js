@@ -3,12 +3,32 @@
 		.module('forumApp')
 		.controller('viewEventModalCtrl', viewEventModalCtrl);
 
-	viewEventModalCtrl.$inject = ['event', '$uibModal', '$uibModalInstance', 'events'];
-	function viewEventModalCtrl (event, $uibModal, $uibModalInstance, events) {
+	viewEventModalCtrl.$inject = ['event', '$uibModal', '$uibModalInstance', 'events', 'authentication'];
+	function viewEventModalCtrl (event, $uibModal, $uibModalInstance, events, authentication) {
 		var vm = this;
 		vm.event = event;
 		vm.readOnly = true;
 		vm.hasGuests = event.guestList.length > 0 ? true : false;
+		vm.isLoggedIn = authentication.isLoggedIn();
+		vm.currentUser = authentication.currentUser();
+
+		vm.addGoing = function () {
+			// to do: prevent repeat adds to guestlist
+			vm.currentUser.attending = true;
+			events
+			.addGuest(event._id, vm.currentUser)
+			.success(function (data) {
+				vm.guestFound = true;
+				vm.modal.close(data);
+			})
+			.error(function () {
+				console.log("Could not add guest to event, try again");
+			});
+		};
+
+		vm.addNotGoing = function () {
+			vm.currentUser.attending = false;
+		};
 
 		vm.toggleReadOnly = function () {
 			if (vm.readOnly) {

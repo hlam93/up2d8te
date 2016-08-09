@@ -16,13 +16,13 @@ var ctrlAuth = require('../controllers/authentication');
 router.get('/events/org', ctrlEvents.getOrgEvents);
 router.get('/events/local', ctrlEvents.getLocalEvents);
 router.get('/events/:eventid', ctrlEvents.getEventbyId);
-router.post('/events', auth, ctrlEvents.createEvent);
-router.put('/events/:eventid', auth, ctrlEvents.updateEvent);
-router.delete('/events/:eventid', auth, ctrlEvents.deleteEvent);
+router.post('/events', ctrlEvents.createEvent);
+router.put('/events/:eventid', ctrlEvents.updateEvent);
+router.delete('/events/:eventid', ctrlEvents.deleteEvent);
 
 // Guestlist here
-router.get('/events/org/:eventid', ctrlGuestlist.getGuestList);
-router.get('/events/local/:eventid', ctrlGuestlist.getGuestList);
+router.get('/events/:eventid/guests', ctrlGuestlist.getGuestList);
+router.get('/events/:eventid/guests/:emailid', ctrlGuestlist.findGuest);
 router.post('/events/:eventid', ctrlGuestlist.addGuest);
 
 // Entries here

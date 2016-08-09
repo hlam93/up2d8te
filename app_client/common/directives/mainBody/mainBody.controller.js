@@ -3,11 +3,12 @@
 		.module('forumApp')
 		.controller('mainBodyCtrl', mainBodyCtrl);
 
-	mainBodyCtrl.$inject = ['$scope', '$uibModal', 'events', 'bible'];
-	function mainBodyCtrl ($scope, $uibModal, events, bible) {
+	mainBodyCtrl.$inject = ['$scope', '$uibModal', 'events', 'bible', 'authentication'];
+	function mainBodyCtrl ($scope, $uibModal, events, bible, authentication) {
 		var vm = this;
 		vm.content = $scope.content.body;
 		vm.path = $scope.path;
+		vm.isLoggedIn = authentication.isLoggedIn();
 
 		vm.popupAddEventForm = function () {
 			var modalInstance = $uibModal.open({

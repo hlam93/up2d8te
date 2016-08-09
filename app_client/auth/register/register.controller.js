@@ -34,7 +34,6 @@
 
 		vm.doRegister = function () {
 			// authentication service here
-			console.log(vm.credentials);
 			authentication
 				.register(vm.credentials)
 				.error(function (err) {
